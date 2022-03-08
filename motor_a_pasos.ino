@@ -2,7 +2,7 @@ int IN1 = 10;
 int IN2 = 11;
 int IN3 = 12;
 int IN4 = 13;
-
+enum SentidoGiro {Horario,AntiHorario};
 void setup() {
   pinMode (IN1, OUTPUT);
   pinMode (IN2, OUTPUT);
@@ -51,4 +51,13 @@ void giro (bool sentido){ // funcion para girar solo 90 grados en un sentido u o
         delayMicroseconds (demora);
     }
   }
+}
+
+void giro(enum SentidoGiro sentido) {
+    if (sentido==Horario) {
+        giro(0);
+    }
+    else {
+        giro(1);
+    }
 }
