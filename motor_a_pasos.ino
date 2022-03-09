@@ -145,3 +145,28 @@ void keepOn(int motors[][4],enum Motor mantiene){
         }
       }
 }
+
+// Guardar los datos que llegan por python
+int saveData(char message[], int MAX_LENGTH){ // Saves data returning 0 if it didn't receive data, 1 if it did and 2 for error
+
+  if(Serial.available()){
+    for(int i=0;i<MAX_LENGTH;i++){
+        message[i]='\t';
+    }
+    delay(100);// waiting for message
+    int it=0;
+    while(Serial.available()>0 && it<MAX_LENGTH){
+      message[it++]=char(Serial.read());
+    }
+    //ImprimePantalla(message,MAX_LENGTH);
+    if(it==MAX_LENGTH){
+      Serial.flush();
+      for(int i=0;i<MAX_LENGTH;i++){
+        message[i]='\t';
+      }
+      return 2;
+    }
+    return 1;
+  }
+  return 0;
+}
