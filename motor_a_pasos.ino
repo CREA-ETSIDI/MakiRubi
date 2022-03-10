@@ -151,7 +151,7 @@ int saveData(char message[], int MAX_LENGTH){ // Saves data returning 0 if it di
 
   if(Serial.available()){
     for(int i=0;i<MAX_LENGTH;i++){
-        message[i]='\t';
+        message[i]='\0';
     }
     delay(100);// waiting for message
     int it=0;
@@ -162,7 +162,7 @@ int saveData(char message[], int MAX_LENGTH){ // Saves data returning 0 if it di
     if(it==MAX_LENGTH){
       Serial.flush();
       for(int i=0;i<MAX_LENGTH;i++){
-        message[i]='\t';
+        message[i]='\0';
       }
       return 2;
     }
