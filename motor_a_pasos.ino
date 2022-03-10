@@ -1,3 +1,6 @@
+#include <string.h>
+#define MESSAGE_LENGTH 100
+
 int IN1 = 10;
 int IN2 = 11;
 int IN3 = 12;
@@ -12,6 +15,8 @@ int motorB[]={};
 // Por comodidad al escribir el código y aumentar su 
 // reutilización, se considera el usar una matriz
 int motorMatrix[6][4]; // 6 motores con 4 pines de control
+
+char mensaje[MESSAGE_LENGTH];
 
 // Falta saber para que valores que se pasan a la función giro
 // el giro efectuado por el motor es horario o antihorario
