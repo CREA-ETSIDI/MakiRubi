@@ -20,10 +20,6 @@ class ArduinoCom(object):
             info=info.upper()
             string=str()
             # First convert to lower cases the ones that are followed by '_'
-            if type(info)==type(str()):
-            info=info.upper()
-            string=str()
-            # First convert to lower cases the ones that are followed by '_'
             for i in range(0,top,1):
                 if info[i]!='_':
                     if (i+1)<top:
@@ -35,12 +31,10 @@ class ArduinoCom(object):
                         string+=info[i]
                             #info[i]=info[i].lower()
             # It sends only the letters
-            print('Before Sending.  '+string)
+            #print('Before Sending.  '+string)
+
         for i in string:
             self.ComHandler.write(i.encode('ascii')) # return the amount of sent data
-        
-        for i in info:
-            return self.ComHandler.write(i.encode('ascii')) # return the amount of sent data
    
     def read(self):
         # It reads the amount of bytes passed
