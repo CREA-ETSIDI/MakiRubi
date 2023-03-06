@@ -118,9 +118,7 @@ delay(1000);
 
 
 /*******   MENU SENCILLO   ************* 
-
   // Primero se cambia el estado sí no se están ejecutando los movimientos
-
   
   if(estado==ENVIO_DATOS){ // Esperando al envio de datos
     
@@ -137,7 +135,6 @@ delay(1000);
             default: mensajeCorrecto=0; break;
             }
         }
-
         if(unaVez==false) {
         //Envio de los datos a la pantalla LED por I2C
           unaVez=true;
@@ -309,38 +306,36 @@ int saveData(char message[], int MAX_LENGTH){ // Saves data returning 0 if it di
 
 void secuenciaGiros(int MotorMatrix[][4],char cadena[],int tam){
   int i;
-   enum SentidoGiro sentido;
+  enum SentidoGiro sentido;
   Serial.write("Moviendo Motores\n");
-   // Va caracter por caracter ejecutando la instrucción
-   for(i=0;i<cadena[i]!='\0';i++){
-
-      // Distingue sí el sentido de giro es horario o antihorario
-      if(cadena[i]>='a' && cadena[i]<='z')  sentido = AntiHorario;  
-      else if (cadena[i]>='A' && cadena[i] <= 'Z') sentido = Horario;
-      
-      // Switch para la ejecución de un giro, 
-      // apagando del resto de señales de control de los motores
-      switch(cadena[i]){
-        case 'R': case 'r':
-          keepOn(motorMatrix,R);
-          giro(sentido,motorMatrix[R]);
-          break;
-        case 'L': case 'l':
-          keepOn(motorMatrix,L);
-          giro(sentido,motorMatrix[L]); break;
-        case 'U': case 'u':
-          keepOn(motorMatrix,U);
-          giro(sentido,motorMatrix[U]); break;
-        case 'D': case 'd':
-          keepOn(motorMatrix,D);
-          giro(sentido,motorMatrix[D]); break;
-        case 'F': case 'f':
-          keepOn(motorMatrix,F);
-          giro(sentido,motorMatrix[F]); break;
-        case 'B': case 'b':
-          keepOn(motorMatrix,B);
-          giro(sentido,motorMatrix[B]); break;
-        };
-        
-    }
+  // Va caracter por caracter ejecutando la instrucción
+  for(i=0;i<cadena[i]!='\0';i++){
+    // Distingue sí el sentido de giro es horario o antihorario
+    if(cadena[i]>='a' && cadena[i]<='z')  sentido = AntiHorario;  
+    else if (cadena[i]>='A' && cadena[i] <= 'Z') sentido = Horario;
+    
+    // Switch para la ejecución de un giro, 
+    // apagando del resto de señales de control de los motores
+    switch(cadena[i]){
+    case 'R': case 'r':
+      keepOn(motorMatrix,R);
+      giro(sentido,motorMatrix[R]);
+      break;
+    case 'L': case 'l':
+      keepOn(motorMatrix,L);
+      giro(sentido,motorMatrix[L]); break;
+    case 'U': case 'u':
+      keepOn(motorMatrix,U);
+      giro(sentido,motorMatrix[U]); break;
+    case 'D': case 'd':
+      keepOn(motorMatrix,D);
+      giro(sentido,motorMatrix[D]); break;
+    case 'F': case 'f':
+      keepOn(motorMatrix,F);
+      giro(sentido,motorMatrix[F]); break;
+    case 'B': case 'b':
+      keepOn(motorMatrix,B);
+      giro(sentido,motorMatrix[B]); break;
+    };
   }
+}
