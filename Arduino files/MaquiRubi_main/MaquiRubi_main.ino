@@ -5,7 +5,7 @@
 int motorMatrix[6][4]; // 6 motores con 4 pines de control
 
 //char mensaje[MESSAGE_LENGTH]="fFbBdDuUlLrR";
-char mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";
+char test_mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";
 
 enum SentidoGiro {Horario=0,AntiHorario=1};
 
@@ -31,47 +31,9 @@ void loop() {
   static bool recibiendoDatos=false; // vamos a recibir los datos?
   
   digitalWrite(PIN_LED,0);
-  secuenciaGiros(mensaje,MESSAGE_LENGTH);
+  secuenciaGiros(test_mensaje, MESSAGE_LENGTH);
   digitalWrite(PIN_LED,1);
   delay(1000);
-}
-
-void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un sentido u otro
-  int demora = 750;
-  
-  bool micropasos[8][4] = {
-    {1, 0, 0, 0},
-    {1, 0, 1, 0},
-    {0, 0, 1, 0},
-    {0, 1, 1, 0},
-    {0, 1, 0, 0},
-    {0, 1, 0, 1},
-    {0, 0, 0, 1},
-    {1, 0, 0, 1}
-  };
-  
-  if (sentido == 0)
-  {
-    for (int i = 0; i < 100; i++)
-    {
-      digitalWrite(pines[0], micropasos[i%8][0]);
-      digitalWrite(pines[1], micropasos[i%8][1]);
-      digitalWrite(pines[2], micropasos[i%8][2]);
-      digitalWrite(pines[3], micropasos[i%8][3]);
-      delayMicroseconds (demora);
-    }
-  }
-  else
-  {
-    for (int i = 0; i < 100; i++)
-    {
-      digitalWrite(pines[3], micropasos[i%8][0]);
-      digitalWrite(pines[2], micropasos[i%8][1]);
-      digitalWrite(pines[1], micropasos[i%8][2]);
-      digitalWrite(pines[0], micropasos[i%8][3]);
-      delayMicroseconds (demora);
-    }
-  }
 }
 
 // Recibe una secuencia de movimientos, los trata y ejecuta los movimientos de los motores 
@@ -110,6 +72,7 @@ void secuenciaGiros(char cadena[], int tam)
       giro(sentido,motorMatrix[B]);
       break;
     }
+    delay(500);
   }
 }
 
@@ -124,7 +87,7 @@ void keepOn(int motors[][4],enum Motor mantiene){
     {
       if(motor!=mantiene)
       {
-        digitalWrite(motors[motor][pin],0);
+        digitalWrite(motors[motor][pin], 0);
       }
     }
   }
@@ -223,5 +186,43 @@ SentidoGiro getSentidoGiro(char instruccion)
   }
   else{
     return Horario;
+  }
+}
+
+void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un sentido u otro
+  int demora = 750;
+  
+  bool micropasos[8][4] = {
+    {1, 0, 0, 0},
+    {1, 0, 1, 0},
+    {0, 0, 1, 0},
+    {0, 1, 1, 0},
+    {0, 1, 0, 0},
+    {0, 1, 0, 1},
+    {0, 0, 0, 1},
+    {1, 0, 0, 1}
+  };
+  
+  if (sentido == 0)
+  {
+    for (int i = 0; i < 110; i++)
+    {
+      digitalWrite(pines[0], micropasos[i%8][0]);
+      digitalWrite(pines[1], micropasos[i%8][1]);
+      digitalWrite(pines[2], micropasos[i%8][2]);
+      digitalWrite(pines[3], micropasos[i%8][3]);
+      delayMicroseconds (demora);
+    }
+  }
+  else
+  {
+    for (int i = 0; i < 110; i--)
+    {
+      digitalWrite(pines[3], micropasos[i%8][0]);
+      digitalWrite(pines[2], micropasos[i%8][1]);
+      digitalWrite(pines[1], micropasos[i%8][2]);
+      digitalWrite(pines[0], micropasos[i%8][3]);
+      delayMicroseconds (demora);
+    }
   }
 }
