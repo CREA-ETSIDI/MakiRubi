@@ -6,7 +6,7 @@
 
 int motorMatrix[6][4]; // 6 motores con 4 pines de control
 
-//char mensaje[MESSAGE_LENGTH]="fFbBdDuUlLrR";
+char mensaje[MESSAGE_LENGTH];
 char test_mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";
 
 enum SentidoGiro {Horario=0,AntiHorario=1};
@@ -31,14 +31,31 @@ void loop() {
   static enum State estadoAnterior=INICIO;
   static bool unaVez=false; // Manda una vez la frase a imprimir en la pantalla
   static bool recibiendoDatos=false; // vamos a recibir los datos?
+
+  getMensaje(mensaje);
   
   digitalWrite(PIN_LED,0);
-  secuenciaGiros(test_mensaje, MESSAGE_LENGTH);
+  secuenciaGiros(mensaje, MESSAGE_LENGTH);
   digitalWrite(PIN_LED,1);
   delay(1000);
 }
 
 // Recibe una secuencia de movimientos, los trata y ejecuta los movimientos de los motores 
+
+void getMensaje(char* msg){
+  unsigned int i = 0;
+  char lastChar = 255;
+  while(lastChar != '\n' && i < MESSAGE_LENGTH){
+    if (Serial.available() > 0) {
+      lastChar = Serial.read();
+      Serial.print("I received: ");
+      Serial.println(lastChar, DEC);
+      msg[i] = lastChar;
+      i++;
+    }
+  }
+}
+
 void secuenciaGiros(char cadena[], int tam)
 {
   enum SentidoGiro sentido;
