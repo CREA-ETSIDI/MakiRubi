@@ -2,6 +2,8 @@
 #define PIN_LED 13
 #define MESSAGE_LENGTH 100
 
+#define __modo_normal__
+
 int motorMatrix[6][4]; // 6 motores con 4 pines de control
 
 //char mensaje[MESSAGE_LENGTH]="fFbBdDuUlLrR";
@@ -43,33 +45,48 @@ void secuenciaGiros(char cadena[], int tam)
   Serial.write("Moviendo Motores\n");
   for(int i = 0; (i < cadena[i]) && (cadena[i] != '\0'); i++)
   {
+    Serial.print(i);Serial.print(": ");
+    Serial.println(cadena[i]);
     sentido = getSentidoGiro(cadena[i]);
-    
+
+    Serial.println(sentido);
     switch(cadena[i])
     {
-    case 'R': case 'r':
-      //keepOn(motorMatrix,R);
-      giro(sentido,motorMatrix[R]);
+    case 'R': 
+      giro(Horario,motorMatrix[R]);
       break;
-    case 'L': case 'l':
-      //keepOn(motorMatrix,L);
-      giro(sentido,motorMatrix[L]);
+    case 'r':
+      giro(AntiHorario,motorMatrix[R]);
       break;
-    case 'U': case 'u':
-      // keepOn(motorMatrix,U);
-      giro(sentido,motorMatrix[U]);
+    case 'L':
+      giro(Horario,motorMatrix[L]);
       break;
-    case 'D': case 'd':
-      //keepOn(motorMatrix,D);
-      giro(sentido,motorMatrix[D]);
+    case 'l':
+      giro(AntiHorario,motorMatrix[L]);
       break;
-    case 'F': case 'f':
-      //keepOn(motorMatrix,F);
-      giro(sentido,motorMatrix[F]);
+    case 'U':
+      giro(Horario,motorMatrix[U]);
       break;
-    case 'B': case 'b':
-      //keepOn(motorMatrix,B);
-      giro(sentido,motorMatrix[B]);
+    case 'u':
+      giro(AntiHorario,motorMatrix[U]);
+      break;
+    case 'D':
+      giro(Horario,motorMatrix[D]);
+      break;
+    case 'd':
+      giro(AntiHorario,motorMatrix[D]);
+      break;
+    case 'F':
+      giro(Horario,motorMatrix[F]);
+      break;
+    case 'f':
+      giro(AntiHorario,motorMatrix[F]);
+      break;
+    case 'B':
+      giro(Horario,motorMatrix[B]);
+      break;
+    case 'b':
+      giro(AntiHorario,motorMatrix[B]);
       break;
     }
     delay(500);
@@ -189,6 +206,7 @@ SentidoGiro getSentidoGiro(char instruccion)
   }
 }
 
+#ifdef __modo_normal__
 void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un sentido u otro
   int demora = 750;
   
@@ -205,7 +223,7 @@ void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un
   
   if (sentido == 0)
   {
-    for (int i = 0; i < 110; i++)
+    for (int i = 0; i < 100; i++)
     {
       digitalWrite(pines[0], micropasos[i%8][0]);
       digitalWrite(pines[1], micropasos[i%8][1]);
@@ -216,13 +234,50 @@ void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un
   }
   else
   {
-    for (int i = 0; i < 110; i--)
+    for (int i = 100; i > 0; i--)
     {
-      digitalWrite(pines[3], micropasos[i%8][0]);
-      digitalWrite(pines[2], micropasos[i%8][1]);
-      digitalWrite(pines[1], micropasos[i%8][2]);
-      digitalWrite(pines[0], micropasos[i%8][3]);
+      digitalWrite(pines[0], micropasos[i%8][0]);
+      digitalWrite(pines[1], micropasos[i%8][1]);
+      digitalWrite(pines[2], micropasos[i%8][2]);
+      digitalWrite(pines[3], micropasos[i%8][3]);
       delayMicroseconds (demora);
     }
   }
 }
+#else
+#ifdef __modo_alto_par__
+void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un sentido u otro
+  int demora = 750;
+  
+  bool micropasos[4][4] = {
+    {1, 0, 1, 0},
+    {0, 1, 1, 0},
+    {0, 1, 0, 1},
+    {1, 0, 0, 1}
+  };
+  
+  if (sentido == 0)
+  {
+    for (int i = 0; i < 50; i++)
+    {
+      digitalWrite(pines[0], micropasos[i%4][0]);
+      digitalWrite(pines[1], micropasos[i%4][1]);
+      digitalWrite(pines[2], micropasos[i%4][2]);
+      digitalWrite(pines[3], micropasos[i%4][3]);
+      delayMicroseconds (demora);
+    }
+  }
+  else
+  {
+    for (int i = 0; i < 50; i--)
+    {
+      digitalWrite(pines[3], micropasos[i%4][0]);
+      digitalWrite(pines[2], micropasos[i%4][1]);
+      digitalWrite(pines[1], micropasos[i%4][2]);
+      digitalWrite(pines[0], micropasos[i%4][3]);
+      delayMicroseconds (demora);
+    }
+  }
+}
+#endif
+#endif
