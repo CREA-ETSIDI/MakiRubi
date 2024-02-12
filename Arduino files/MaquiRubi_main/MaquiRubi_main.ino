@@ -1,6 +1,8 @@
 #include <String.h>
 #define PIN_LED 13
 #define MESSAGE_LENGTH 100
+enum SentidoGiro {Horario=0,AntiHorario=1};
+enum Motor {U=0,D,R,L,F,B};
 
 char mensaje[MESSAGE_LENGTH];
 char test_mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";

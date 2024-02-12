@@ -3,10 +3,6 @@
 
 int motorMatrix[6][4]; // 6 motores con 4 pines de control
 
-enum SentidoGiro {Horario=0,AntiHorario=1};
-
-enum Motor {U=0,D,R,L,F,B};
-
 // Mantiene en funcionamiento el motor que se le ha pasado 
 // como parámetro, puede ser que pase a ser un entero
 // la variable mantiene
