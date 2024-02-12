@@ -1,5 +1,8 @@
 #ifndef __controlMotores_h__
 #define __controlMotores_h__
+
+#include "controlSerial.h"
+
 #define __modo_normal__
 //#define __modo_alto_par__
 
