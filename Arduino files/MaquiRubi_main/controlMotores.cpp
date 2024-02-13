@@ -3,7 +3,8 @@
 // Mantiene en funcionamiento el motor que se le ha pasado 
 // como parámetro, puede ser que pase a ser un entero
 // la variable mantiene
-void keepOn(int motors[6][4], Motor mantiene){
+void keepOn(int motors[6][4], Motor mantiene)
+{
   int pin,motor;
   for(motor=0;motor<6;motor++)
   {
@@ -35,6 +36,16 @@ void motorMatrix_init(){
     pinMode(motorMatrix[R][i],OUTPUT);
     pinMode(motorMatrix[B][i],OUTPUT);
     pinMode(motorMatrix[F][i],OUTPUT);
+  }
+}
+
+SentidoGiro getSentidoGiro(char instruccion)
+{
+  if(instruccion >= 'a' && instruccion <= 'z'){
+    return AntiHorario;  
+  }
+  else{
+    return Horario;
   }
 }
 

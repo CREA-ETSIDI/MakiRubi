@@ -15,16 +15,6 @@ void getMensaje(char* msg){
   }
 }
 
-SentidoGiro getSentidoGiro(char instruccion)
-{
-  if(instruccion >= 'a' && instruccion <= 'z'){
-    return AntiHorario;  
-  }
-  else{
-    return Horario;
-  }
-}
-
 // Guardar los datos que llegan por python
 int saveData(char message[], int MAX_LENGTH)  // Saves data returning 0 if it didn't receive data, 1 if it did and 2 for error
 {

@@ -4,6 +4,10 @@
 
 #define PIN_LED 13
 
+int motorMatrix[6][4]; // 6 motores con 4 pines de control
+char mensaje[MESSAGE_LENGTH];
+char test_mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";
+
 void setup() {
   Serial.begin(9600);
 
