@@ -1,7 +1,11 @@
 #include "controlSerial.h"
 
-// Guardar los datos que llegan por python
-int saveData(char message[], int max_len)  // Saves data returning 0 if it didn't receive data, 1 if it did and 2 for error
+// Guarda en message la secuencia de instrucciones enviada desde python
+// max_len es el tamaño máximo de message
+// Devuelve 0 en caso de lectura exitosa
+// Devuelve -1 en caso de no recibir datos
+// Devuelve -2 en caso de que la secuencia recibida sea más larga que max_len y borra los contenidos de message
+int saveData(char message[], int max_len)
 {
     if(!Serial.available())
     {
@@ -13,7 +17,7 @@ int saveData(char message[], int max_len)  // Saves data returning 0 if it didn'
     delay(100);// waiting for message
     for(int i = 0; i < max_len; i++)
     {
-        message[i]=char(Serial.read());
+        message[i]= readByte();
         if(message[i] == '\n')
         {
           return 1;
@@ -25,16 +29,19 @@ int saveData(char message[], int max_len)  // Saves data returning 0 if it didn'
     return 2;
 }
 
+//Vacía el contenido del array data de longitud max_len
 void clearData(char data[], int max_len)
 {
-
     for(int i=0;i<max_len;i++)
     {
         data[i]='\0';
     }
 }
 
-//Devuelve el caracter recibido o -1 en caso de error
+//Lee un caracter del puerto serie
+//En caso exitoso devuelve el caracter
+//En caso de recibir un caracter invñalido devuelve -1
+//En caso de que caduque el timeout devuelve -2
 char readByte(unsigned long int timeout = 1000)
 {
     unsigned long int end_time = millis() + timeout;
@@ -43,10 +50,19 @@ char readByte(unsigned long int timeout = 1000)
         if(Serial.available())
         {
             char caracter = Serial.read();
-            return caracter;
+
+            if (esValido(caracter))
+            {
+              return caracter; 
+            }
+            else
+            {
+              return -1;
+            }
         }
     }
-    return -1;
+    return -2; //POR QUÉ TENGO QUE HACER ESTO ASÍ? QUIERO PROGRAMARLO EN RUST
+    //QUE ALGUIEN ME DE UN Option<T> POR FAVOR
 }
 
 //Comprueba si el caracter no pertenece a la tabla ASCII extendida.
