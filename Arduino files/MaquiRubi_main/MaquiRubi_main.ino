@@ -11,7 +11,7 @@ char test_mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";
 void setup() {
   Serial.begin(9600);
 
-  motorMatrix_init();
+  //motorMatrix_init();
   
   pinMode(PIN_LED,OUTPUT);
   digitalWrite(PIN_LED,1);

@@ -1,5 +1,6 @@
 #ifndef __controlSerial_h__
 #define __controlSerial_h__
+
 #include <Arduino.h>
 
 #define MESSAGE_LENGTH 100

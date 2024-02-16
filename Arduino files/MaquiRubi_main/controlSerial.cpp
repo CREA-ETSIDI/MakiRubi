@@ -62,7 +62,7 @@ char readByte(unsigned long int timeout = 1000)
         }
     }
     return -2; //POR QUÉ TENGO QUE HACER ESTO ASÍ? QUIERO PROGRAMARLO EN RUST
-    //QUE ALGUIEN ME DE UN Option<T> POR FAVOR
+    //QUE ALGUIEN ME DE UN Result<T> POR FAVOR
 }
 
 //Comprueba si el caracter no pertenece a la tabla ASCII extendida.
