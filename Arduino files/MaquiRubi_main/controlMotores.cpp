@@ -2,7 +2,8 @@
 
 void secuenciaGiros(char cadena[], int tam)
 {
-  
+  instruccion instrucciones[tam];
+  parsear_instrucciones(instrucciones, cadena, tam);
 }
 
 instruccion map_char_to_instruccion(char comando)
@@ -38,4 +39,17 @@ instruccion map_char_to_instruccion(char comando)
       //QUE ALGUIEN ME DE UN Option<T> POR FAVOR
       //MUERTE A LOS NULL!
   }
+}
+
+int parsear_instrucciones(instruccion instrucciones[], char cadena[], int tam)
+{
+    for (int i = 0; i < tam; i++)
+    {
+        instrucciones[i] = map_char_to_instruccion(cadena[i]);
+        if(instrucciones[i].motor == Null)
+        {
+            return 0;
+        }
+    }
+    return -1;
 }

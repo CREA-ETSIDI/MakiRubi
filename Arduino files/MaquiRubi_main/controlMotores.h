@@ -17,4 +17,5 @@ typedef struct{
 
 void secuenciaGiros(char cadena[], int tam);
 instruccion map_char_to_instruccion(char comando);
+int parsear_instrucciones(instruccion instrucciones[], char cadena[], int tam);
 #endif

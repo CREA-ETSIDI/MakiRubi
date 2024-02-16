@@ -17,7 +17,7 @@ void clearData(char data[], int max_len);
 
 //Lee un caracter del puerto serie
 //En caso exitoso devuelve el caracter
-//En caso de recibir un caracter invñalido devuelve -1
+//En caso de recibir un caracter inválido devuelve -1
 //En caso de que caduque el timeout devuelve -2
 char readByte(unsigned long int timeout = 1000);
 
