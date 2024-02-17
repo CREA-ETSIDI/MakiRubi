@@ -9,55 +9,55 @@
 /*********************
 ***PIN**DEFINITIONS*** 
 *********************/
-#define U_IN1 0
-#define U_IN2 0
-#define U_IN3 0
-#define U_IN4 0
+#define U_IN1 22
+#define U_IN2 23
+#define U_IN3 24
+#define U_IN4 25
 #define U_ENA 13
 #define U_ENB 4
 #define U_CMPA 21
 #define U_CMPB 20
 
-#define D_IN1 0
-#define D_IN2 0
-#define D_IN3 0
-#define D_IN4 0
+#define D_IN1 26
+#define D_IN2 27
+#define D_IN3 28
+#define D_IN4 29
 #define D_ENA 11
 #define D_ENB 12
 #define D_CMPA 19
 #define D_CMPB 18
 
-#define R_IN1 0
-#define R_IN2 0
-#define R_IN3 0
-#define R_IN4 0
+#define R_IN1 37
+#define R_IN2 36
+#define R_IN3 35
+#define R_IN4 34
 #define R_ENA 10
 #define R_ENB 9
 #define R_CMPA 3
 #define R_CMPB 15
 
-#define L_IN1 0
-#define L_IN2 0
-#define L_IN3 0
-#define L_IN4 0
+#define L_IN1 33
+#define L_IN2 32
+#define L_IN3 31
+#define L_IN4 30
 #define L_ENA 5
 #define L_ENB 2
 #define L_CMPA 62
 #define L_CMPB 63
 
-#define F_IN1 0
-#define F_IN2 0
-#define F_IN3 0
-#define F_IN4 0
+#define F_IN1 54
+#define F_IN2 55
+#define F_IN3 56
+#define F_IN4 57
 #define F_ENA 6
 #define F_ENB 7
 #define F_CMPA 64
 #define F_CMPB 65
 
-#define B_IN1 0
-#define B_IN2 0
-#define B_IN3 0
-#define B_IN4 0
+#define B_IN1 58
+#define B_IN2 59
+#define B_IN3 60
+#define B_IN4 61
 #define B_ENA 46
 #define B_ENB 45
 #define B_CMPA 66
