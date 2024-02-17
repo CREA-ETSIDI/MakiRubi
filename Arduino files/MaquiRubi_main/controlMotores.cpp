@@ -1,5 +1,9 @@
 #include "controlMotores.h"
 
+//Inicializa:
+// * Los pines necesarios para controlar los motores
+// * las interrupciones (tanto internas como externas)
+// * Configura correctamente el PWM para ENA y ENB
 void motor_matrix_setup()
 {
     //Pines de control de los motores
@@ -87,6 +91,10 @@ void motor_matrix_setup()
     sei(); //Reactivar interrupciones globales
 }
 
+//Recibe una cadena de caracteres de longitud tam
+//con la secuencia en la que tienen que girar los
+//motores para resolver el cubo y mueve los motores
+//de esa forma
 void secuenciaGiros(char cadena[], uint8_t tam)
 {
     instruccion_t instrucciones[tam];
@@ -94,6 +102,9 @@ void secuenciaGiros(char cadena[], uint8_t tam)
     ejecutar_instrucciones(instrucciones, tam);
 }
 
+//Toma un comando en forma de caracter y devuelve
+//una instrucción que indica qué motor se debe girar
+//y en qué sentido
 instruccion_t map_char_to_instruccion(char comando)
 {
   switch (comando)
@@ -272,6 +283,10 @@ instruccion_t map_char_to_instruccion(char comando)
   }
 }
 
+//Toma un vector de caracteres de longitud tam con la secuencia a ejecutar y lo transforma
+//en un vector de instrucciones que indican qué motor y en qué sentido girarlo.
+//En caso de éxito devuelve 0.
+//En caso de recorrer la cadena entera y no encontrar un stop devuelve -1
 int8_t parsear_instrucciones(instruccion_t instrucciones[], char cadena[], uint8_t tam)
 {
     for (uint8_t i = 0; i < tam; i++)
@@ -285,6 +300,8 @@ int8_t parsear_instrucciones(instruccion_t instrucciones[], char cadena[], uint8
     return -1;
 }
 
+//Toma un vector de instrucciones de longitud tam y ejecuta los movimientos indicados
+//hasta llegar al stop.
 void ejecutar_instrucciones(instruccion_t instrucciones[], uint8_t tam)
 {
     for (uint8_t i = 0; i < tam; i++)
@@ -297,6 +314,7 @@ void ejecutar_instrucciones(instruccion_t instrucciones[], uint8_t tam)
     }
 }
 
+//Gira 90º un motor indicado en el sentido indicado por una instrucción
 void mover_motor_90(instruccion_t instruccion)
 {
     static bool pasos[4][4] = {
