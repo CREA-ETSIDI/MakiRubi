@@ -33,8 +33,8 @@
 #define R_IN4 0
 #define R_ENA 10
 #define R_ENB 9
-#define R_CMPA 15
-#define R_CMPB 14
+#define R_CMPA 3
+#define R_CMPB 15
 
 #define L_IN1 0
 #define L_IN2 0
@@ -80,6 +80,7 @@ typedef struct{
   sentidogiro_t sentido;
 } instruccion_t;
 
+void motor_matrix_setup();
 void secuenciaGiros(char cadena[], uint8_t tam);
 instruccion_t map_char_to_instruccion(char comando);
 int8_t parsear_instrucciones(instruccion_t instrucciones[], char cadena[], uint8_t tam);

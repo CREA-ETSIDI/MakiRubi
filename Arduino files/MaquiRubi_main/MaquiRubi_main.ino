@@ -9,22 +9,21 @@ char mensaje[MESSAGE_LENGTH];
 char test_mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";
 
 void setup() {
-  Serial.begin(9600);
-
-  //motorMatrix_init();
-  
-  pinMode(PIN_LED,OUTPUT);
-  digitalWrite(PIN_LED,1);
-  
-  delay(5000);
+    motor_matrix_setup();
+    Serial.begin(9600);
+    
+    pinMode(PIN_LED,OUTPUT);
+    digitalWrite(PIN_LED,1);
+    
+    delay(5000);
 }
 
 void loop() {
-  saveData(mensaje, MESSAGE_LENGTH);
-  
-  digitalWrite(PIN_LED,0);
-  secuenciaGiros(mensaje, MESSAGE_LENGTH);
-  digitalWrite(PIN_LED,1);
-  
-  delay(1000);
+    saveData(mensaje, MESSAGE_LENGTH);
+    
+    digitalWrite(PIN_LED,0);
+    secuenciaGiros(mensaje, MESSAGE_LENGTH);
+    digitalWrite(PIN_LED,1);
+    
+    delay(1000);
 }
