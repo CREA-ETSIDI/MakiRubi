@@ -4,6 +4,7 @@
 #define WHITE_PIN 9
 
 #define Loop_Delay 300
+#define Delay_2 5000
 
 int Brightness_R;
 int Brightness_G;
@@ -60,6 +61,7 @@ void loop() {
   //  Serial.println(Brightness_G);
   //   Serial.println(Brightness_B);
   //    Serial.println(Brightness_W);
+
   setLEDS(0,0,0,80);
   delay(Loop_Delay);
 }

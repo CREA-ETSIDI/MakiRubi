@@ -7,10 +7,14 @@ int flag = 0;
 int motorMatrix[6][4]; // 6 motores con 4 pines de control
 
 //char mensaje[MESSAGE_LENGTH]= "UDFLBR";
-char mensaje[MESSAGE_LENGTH]= "UDFLBRudflbr";
+char mensaje[MESSAGE_LENGTH]= "uFdrfldudLFRbFdrUFlURuruLF";
+//udflBRUDudfldUdUfR
+//uFdrfldudLFRbFdrUFlURuruLF
+//dUdFdrbrrfBDfu
+//UFdFbrBDfdbrBRdu
 ///no tocar mucho los siguientes: La "L", la "D", la "F"
 
-char test_mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";
+//char test_mensaje[MESSAGE_LENGTH]="FLDFLDFLDfldFLdfLD";
 
 void setup() {
   Serial.begin(9600);

@@ -2,9 +2,10 @@
 #define __controlMotores_h__
 
 #define MESSAGE_LENGTH 100
-#define DEMORA 3000//Aumentamos el delay para evitar sobre calentamientos
+#define DEMORA 1000//Aumentamos el delay para evitar sobre calentamientos
 #define PASOS 110
-  
+#define PASOSUP 110
+  //150 con d
 
 
 #define __modo_normal__
@@ -20,7 +21,7 @@ extern int motorMatrix[6][4]; // 6 motores con 4 pines de control
 void motorMatrix_init();
 void secuenciaGiros(char cadena[], int tam);
 SentidoGiro getSentidoGiro(char instruccion);
-void giro (bool sentido,int pines[]);
+void giro (bool sentido,int pines[], int num_pasos);
 bool verifyMessage(char *msg);
 //void secuenciaGiros(int MotorMatrix[][4],char cadena[],int tam);
 #endif

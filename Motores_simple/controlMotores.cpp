@@ -82,48 +82,48 @@ void secuenciaGiros(char cadena[], int tam)
     Serial.println(sentido);
     switch(cadena[i])
     {
-    case 'R': 
-      giro(Horario,motorMatrix[R]);
+    case 'r': 
+      giro(Horario,motorMatrix[R], 110);
       break;
-    case 'r':
-      giro(AntiHorario,motorMatrix[R]);
-      break;
-    case 'L':
-      giro(Horario,motorMatrix[L]);
+    case 'R':
+      giro(AntiHorario,motorMatrix[R], 100);
       break;
     case 'l':
-      giro(AntiHorario,motorMatrix[L]);
+      giro(Horario,motorMatrix[L], 102);
       break;
-    case 'U':
-      giro(Horario,motorMatrix[U]);
+    case 'L':
+      giro(AntiHorario,motorMatrix[L], 102);
       break;
     case 'u':
-      giro(AntiHorario,motorMatrix[U]);
+      giro(Horario,motorMatrix[U], 102);
       break;
-    case 'D':
-      giro(Horario,motorMatrix[D]);
+    case 'U':
+      giro(AntiHorario,motorMatrix[U], 102);
       break;
     case 'd':
-      giro(AntiHorario,motorMatrix[D]);
+      giro(Horario,motorMatrix[D], 102);
       break;
-    case 'F':
-      giro(Horario,motorMatrix[F]);
+    case 'D':
+      giro(AntiHorario,motorMatrix[D], 102);
       break;
     case 'f':
-      giro(AntiHorario,motorMatrix[F]);
+      giro(Horario,motorMatrix[F], 102);
       break;
-    case 'B':
-      giro(Horario,motorMatrix[B]);
+    case 'F':
+      giro(AntiHorario,motorMatrix[F], 104);
       break;
     case 'b':
-      giro(AntiHorario,motorMatrix[B]);
+      giro(Horario,motorMatrix[B], 106);
+      break;
+    case 'B':
+      giro(AntiHorario,motorMatrix[B], 102);
       break;
     }
-    delay(500);
+    delay(DEMORA);
   }
 }
 #ifdef __modo_normal__
-void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un sentido u otro
+void giro (bool sentido,int pines[], int num_pasos){ // funcion para girar solo 90 grados en un sentido u otro
   bool micropasos[8][4] = {
     {1, 0, 0, 0},
     {1, 0, 1, 0},
@@ -137,7 +137,7 @@ void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un
   
   if (sentido == 0)
   {
-    for (int i = 0; i < PASOS; i++)
+    for (int i = 0; i < num_pasos; i++)
     {
       digitalWrite(pines[0], micropasos[i%8][0]);
       digitalWrite(pines[1], micropasos[i%8][1]);
@@ -148,7 +148,7 @@ void giro (bool sentido,int pines[]){ // funcion para girar solo 90 grados en un
   }
   else
   {
-    for (int i = PASOS; i > 0; i--)
+    for (int i = num_pasos; i > 0; i--)
     {
       digitalWrite(pines[0], micropasos[i%8][0]);
       digitalWrite(pines[1], micropasos[i%8][1]);
